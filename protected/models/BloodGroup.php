@@ -6,11 +6,13 @@
  * The followings are the available columns in table 'tbl_blood_group':
  * @property integer $bld_grp_id
  * @property string $bld_group
+ * @property string $create_time
+ * @property string $update_time
  *
  * The followings are the available model relations:
- * @property TblUser[] $tblUsers
+ * @property User[] $users
  */
-class BloodGroup extends CActiveRecord
+class BloodGroup extends FriendHelpActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -28,11 +30,11 @@ class BloodGroup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('bld_group', 'required'),
+			array('bld_group, create_time, update_time', 'required'),
 			array('bld_group', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('bld_grp_id, bld_group', 'safe', 'on'=>'search'),
+			array('bld_grp_id, bld_group, create_time, update_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,7 +46,7 @@ class BloodGroup extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblUsers' => array(self::HAS_MANY, 'TblUser', 'bld_grp_id'),
+			'users' => array(self::HAS_MANY, 'User', 'bld_grp_id'),
 		);
 	}
 
@@ -56,6 +58,8 @@ class BloodGroup extends CActiveRecord
 		return array(
 			'bld_grp_id' => 'Bld Grp',
 			'bld_group' => 'Bld Group',
+			'create_time' => 'Create Time',
+			'update_time' => 'Update Time',
 		);
 	}
 
@@ -79,6 +83,8 @@ class BloodGroup extends CActiveRecord
 
 		$criteria->compare('bld_grp_id',$this->bld_grp_id);
 		$criteria->compare('bld_group',$this->bld_group,true);
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('update_time',$this->update_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

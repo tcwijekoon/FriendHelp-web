@@ -6,11 +6,13 @@
  * The followings are the available columns in table 'tbl_skills':
  * @property integer $skill_id
  * @property string $skill
+ * @property string $create_time
+ * @property string $update_time
  *
  * The followings are the available model relations:
- * @property TblUser[] $tblUsers
+ * @property User[] $users
  */
-class Skills extends CActiveRecord
+class Skills extends FriendHelpActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -28,11 +30,11 @@ class Skills extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('skill', 'required'),
+			array('skill, create_time, update_time', 'required'),
 			array('skill', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('skill_id, skill', 'safe', 'on'=>'search'),
+			array('skill_id, skill, create_time, update_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,7 +46,7 @@ class Skills extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblUsers' => array(self::HAS_MANY, 'TblUser', 'skill_id'),
+			'users' => array(self::HAS_MANY, 'User', 'skill_id'),
 		);
 	}
 
@@ -56,6 +58,8 @@ class Skills extends CActiveRecord
 		return array(
 			'skill_id' => 'Skill',
 			'skill' => 'Skill',
+			'create_time' => 'Create Time',
+			'update_time' => 'Update Time',
 		);
 	}
 
@@ -79,6 +83,8 @@ class Skills extends CActiveRecord
 
 		$criteria->compare('skill_id',$this->skill_id);
 		$criteria->compare('skill',$this->skill,true);
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('update_time',$this->update_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

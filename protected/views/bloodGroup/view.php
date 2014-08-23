@@ -23,5 +23,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'bld_grp_id',
 		'bld_group',
+		'create_time',
+		'update_time',
 	),
 )); ?>

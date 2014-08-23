@@ -23,5 +23,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'skill_id',
 		'skill',
+		'create_time',
+		'update_time',
 	),
 )); ?>

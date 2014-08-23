@@ -21,6 +21,16 @@
 		<?php echo $form->textField($model,'bld_group',array('size'=>60,'maxlength'=>250)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'create_time'); ?>
+		<?php echo $form->textField($model,'create_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'update_time'); ?>
+		<?php echo $form->textField($model,'update_time'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

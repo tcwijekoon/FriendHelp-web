@@ -9,7 +9,7 @@
  * @property string $status_date
  *
  * The followings are the available model relations:
- * @property TblUser[] $tblUsers
+ * @property User[] $users
  */
 class Status extends CActiveRecord
 {
@@ -45,7 +45,7 @@ class Status extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblUsers' => array(self::HAS_MANY, 'TblUser', 'status_id'),
+			'users' => array(self::HAS_MANY, 'User', 'status_id'),
 		);
 	}
 

@@ -61,8 +61,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'address_city',
 		'bld_grp_id',
 		'skill_id',
-		'register_date',
 		'status_id',
+		'last_login_time',
+		'create_time',
+		'update_time',
 		*/
 		array(
 			'class'=>'CButtonColumn',

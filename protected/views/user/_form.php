@@ -26,16 +26,16 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'gcm_regid'); ?>
-		<?php echo $form->textField($model,'gcm_regid',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'gcm_regid'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>16,'maxlength'=>16)); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'password_repeat'); ?>
+        <?php echo $form->passwordField($model, 'password_repeat', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'password_repeat'); ?>
+    </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'first_name'); ?>
@@ -101,12 +101,6 @@
 		<?php echo $form->labelEx($model,'skill_id'); ?>
 		<?php echo $form->textField($model,'skill_id'); ?>
 		<?php echo $form->error($model,'skill_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'register_date'); ?>
-		<?php echo $form->textField($model,'register_date'); ?>
-		<?php echo $form->error($model,'register_date'); ?>
 	</div>
 
 	<div class="row">

@@ -82,13 +82,23 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'register_date'); ?>
-		<?php echo $form->textField($model,'register_date'); ?>
+		<?php echo $form->label($model,'status_id'); ?>
+		<?php echo $form->textField($model,'status_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'status_id'); ?>
-		<?php echo $form->textField($model,'status_id'); ?>
+		<?php echo $form->label($model,'last_login_time'); ?>
+		<?php echo $form->textField($model,'last_login_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'create_time'); ?>
+		<?php echo $form->textField($model,'create_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'update_time'); ?>
+		<?php echo $form->textField($model,'update_time'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -36,7 +36,9 @@ $this->menu=array(
 		'address_city',
 		'bld_grp_id',
 		'skill_id',
-		'register_date',
 		'status_id',
+		'last_login_time',
+		'create_time',
+		'update_time',
 	),
 )); ?>

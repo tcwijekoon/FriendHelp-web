@@ -12,7 +12,7 @@
  * @property string $location_date
  *
  * The followings are the available model relations:
- * @property TblUser $user
+ * @property User $user
  */
 class UserLocation extends CActiveRecord
 {
@@ -50,7 +50,7 @@ class UserLocation extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'TblUser', 'user_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
