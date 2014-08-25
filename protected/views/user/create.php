@@ -16,3 +16,4 @@ $this->menu=array(
 <h1>Create User</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php //$this->renderPartial('_form', array('model'=>$model,'model_blood'=>$model_blood)); ?>

@@ -11,15 +11,15 @@ class UserIdentity extends CUserIdentity
 
     public function authenticate()
     {
-        $user = User::model()->find('LOWER(username)=?', array(strtolower($this->username)));
+        $user = User::model()->find('LOWER(user_name)=?', array(strtolower($this->username)));
         if ($user === null)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         else if (!$user->validatePassword($this->password))
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         else {
             //save values to use anywher in application like Yii::app()->user->lastLogin;
-            $this->_id = $user->id;
-            $this->username = $user->username;
+            $this->_id = $user->user_id;
+            $this->username = $user->user_name;
             $this->setState('lastLogin', date("m/d/y g:i A", strtotime($user->last_login_time)));
             $this->setState('sessionId',md5($user->last_login_time));
             $user->saveAttributes(array(

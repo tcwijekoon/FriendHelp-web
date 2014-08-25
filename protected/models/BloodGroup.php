@@ -30,7 +30,7 @@ class BloodGroup extends FriendHelpActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('bld_group, create_time, update_time', 'required'),
+			array('bld_group', 'required'),
 			array('bld_group', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

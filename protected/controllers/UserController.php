@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','admin'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -63,6 +63,7 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
+//        $model_blood = new BloodGroup;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -76,6 +77,7 @@ class UserController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+//            'model_blood'=>$model_blood,
 		));
 	}
 

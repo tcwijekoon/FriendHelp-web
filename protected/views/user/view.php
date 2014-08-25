@@ -23,8 +23,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'user_id',
 		'user_name',
-		'gcm_regid',
-		'password',
 		'first_name',
 		'last_name',
 		'mob_no',
