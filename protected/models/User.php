@@ -62,7 +62,7 @@ class User extends FriendHelpActiveRecord
             array('email, user_name', 'unique'),
             array('email', 'email'),
             array('password', 'compare'), //compare the pasword with confirmation
-            array('password_repeat', 'safe'),
+            //array('password_repeat,  password, first_name, last_name, mob_no,  dob, gender, address_no, address_street, address_city, bld_grp_id, skill_id', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('user_id, user_name, first_name, last_name, mob_no, email, dob, gender, address_no, address_street, address_city, bld_grp_id, skill_id, status_id, last_login_time, create_time, update_time', 'safe', 'on' => 'search'),

@@ -54,16 +54,37 @@ class ApiController extends Controller
     {
         if (isset($_POST['SignUp']) && !empty($_POST['SignUp'])) {
             $model = new User;
-
+            $temparyPwd = null;
             $model->attributes = CJSON::decode($_POST['SignUp']);
-            if ($model->save()) {
-                $msg = CJSON::encode(array(array('success' => "true", 'message' => 'sign up successful')));
-                echo $msg;
-            } else {
-                $msg = CJSON::encode(array(array('success' => "false", 'message' => 'sign up failed' . $model->isNewRecord)));
-                echo $msg;
+            $temparyPwd = $model->password;
+            $model->password = $model->hashPassword($model->password);
+            if ($model->isNewRecord) {
+                if ($model->save(false)) {
+                    echo $this->loginUsingParams($model->user_name, $temparyPwd);
+//                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'sign up successful')));
+//                    echo $msg;
+                } else {
+//                    $msg = CJSON::encode(array(array('success' => "false", 'message' => 'sign up failed' . $model->bld_grp_id)));
+                    $msg = CJSON::encode(array(array('success' => "false", 'message' => 'sign up failed' . $model->password)));
+//                    . '--' . $model->address_city . '--'. $model->address_no . '--'. $model->address_street . '--'. $model->bld_grp_id . '--' . $model->create_time . '--' . $model->create_user_id . '--' . $model->dob . '--' . $model->mob_no . '--' . $model->password
+                    echo $msg;
+                }
             }
         }
+    }
+
+    function loginUsingParams($username, $password)
+    {
+        $model = new LoginForm;
+        $model->username = $username;
+        $model->password = $password;
+
+        if ($model->validate() && $model->login()) {
+            $msg = CJSON::encode(array(array('success' => "true", 'message' => 'login success', 'user_name' => $model->username)));
+        } else {
+            $msg = CJSON::encode(array(array('success' => "false", 'message' => 'Invalid username or password ')));
+        }
+        return $msg;
     }
 
     public function actionGetSkills()
