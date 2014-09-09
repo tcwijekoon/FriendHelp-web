@@ -16,7 +16,7 @@ class ApiController extends Controller
             $model->attributes = CJSON::decode($_POST['LoginForm']);
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                $msg = CJSON::encode(array(array('success' => "true", 'message' => 'login success ')));
+                $msg = CJSON::encode(array(array('success' => "true", 'message' => 'login success ', 'user_name' => $model->username, 'user_Id' => Yii::app()->user->getId())));
                 echo $msg;
             } else {
                 $msg = CJSON::encode(array(array('success' => "false", 'message' => 'Invalid username or password ')));
@@ -60,9 +60,9 @@ class ApiController extends Controller
             $model->password = $model->hashPassword($model->password);
             if ($model->isNewRecord) {
                 if ($model->save(false)) {
-                    echo $this->loginUsingParams($model->user_name, $temparyPwd);
-//                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'sign up successful')));
-//                    echo $msg;
+//                    echo $this->loginUsingParams($model->user_name, $temparyPwd);
+                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'sign up successful')));
+                    echo $msg;
                 } else {
 //                    $msg = CJSON::encode(array(array('success' => "false", 'message' => 'sign up failed' . $model->bld_grp_id)));
                     $msg = CJSON::encode(array(array('success' => "false", 'message' => 'sign up failed' . $model->password)));
@@ -73,19 +73,19 @@ class ApiController extends Controller
         }
     }
 
-    function loginUsingParams($username, $password)
-    {
-        $model = new LoginForm;
-        $model->username = $username;
-        $model->password = $password;
-
-        if ($model->validate() && $model->login()) {
-            $msg = CJSON::encode(array(array('success' => "true", 'message' => 'login success', 'user_name' => $model->username)));
-        } else {
-            $msg = CJSON::encode(array(array('success' => "false", 'message' => 'Invalid username or password ')));
-        }
-        return $msg;
-    }
+//    function loginUsingParams($username, $password)
+//    {
+//        $model = new LoginForm;
+//        $model->username = $username;
+//        $model->password = $password;
+//
+//        if ($model->validate() && $model->login()) {
+//            $msg = CJSON::encode(array(array('success' => "true", 'message' => 'login success', 'user_name' => $model->username, 'user_Id' => Yii::app()->user->getId())));
+//        } else {
+//            $msg = CJSON::encode(array(array('success' => "false", 'message' => 'Invalid username or password ')));
+//        }
+//        return $msg;
+//    }
 
     public function actionGetSkills()
     {
