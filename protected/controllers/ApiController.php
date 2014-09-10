@@ -127,45 +127,46 @@ class ApiController extends Controller
         }
     }
 
-    public function send_notification($registatoin_ids, $message)
+    protected function renderJSON($data)
     {
+        header('Content-type: application/json');
+        echo CJSON::encode($data);
 
-        /* @var $apnsGcm YiiGcm */
+        foreach (Yii::app()->log->routes as $route) {
+            if ($route instanceof CWebLogRoute) {
+                $route->enabled = false; // disable any weblogroutes
+            }
+        }
+        //Yii::app()->end();
+    }
 
-        /*
-         $gcm = Yii::app()->gcm;
+    public function actionGcm(){
+        $regId = 'APA91bHhKH6V7fpLqWeip85hxAw3k3ZWJAhCC3zZtRMtlIlEBaR0VkDTDi5dWbYKNQN6DTkEgVXCCjnBHBId4Cbx67hgMZLYgb0ugrRVXJqrUrQ2xR4dsLI_tehyk3OYLwjMlLdPgqgMfE92JmzfViaFjh0dS5n6TbYEQYPOZ8aRHZ1FpBybBZw';
+        $message = 'test ddfsfsdfmsg';
 
-         $apns_registatoin_ids = array($registatoin_ids);
-         $apns_messages = array("price" => $message);
-         $gcm->send($apns_registatoin_ids, $apns_messages,
-         array(
-         'price' => 1,
-         ),
-         array(
-         'timeToLive' => 3
-         )
-         );
-         */
+        $registatoin_ids = array($regId);
+        $message = array("price" => $message);
 
-        $apns_registatoin_ids = array($registatoin_ids);
-        $apns_messages = array("price" => $message);
+        $result = $this->send_notification($registatoin_ids, $message);
+
+        echo $result;
+    }
+
+    public function send_notification($registatoin_ids, $message) {
+        // Set POST variables
         $url = 'https://android.googleapis.com/gcm/send';
 
         $fields = array(
-            'registration_ids' => $apns_registatoin_ids,
-            'data' => $apns_messages,
+            'registration_ids' => $registatoin_ids,
+            'data' => $message,
         );
 
-        // define("GOOGLE_API_KEY", "AIzaSyBo4BPp5b4VcAjOhvBQP3_KtQV9FVnUDB0"); //thushara google gcm account
-        define("GOOGLE_API_KEY", "AIzaSyDzDJlT43jEMvekT-aexn9osmty_1hc1TE"); // winniew splitit google account
-
         $headers = array(
-            'Authorization: key=' . GOOGLE_API_KEY,
+            'Authorization: key=AIzaSyBo4BPp5b4VcAjOhvBQP3_KtQV9FVnUDB0',
             'Content-Type: application/json'
         );
         // Open connection
         $ch = curl_init();
-        echo $ch;
 
         // Set the url, number of POST vars, POST data
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -187,20 +188,6 @@ class ApiController extends Controller
 
         // Close connection
         curl_close($ch);
-        // echo $result;
-
-    }
-
-    protected function renderJSON($data)
-    {
-        header('Content-type: application/json');
-        echo CJSON::encode($data);
-
-        foreach (Yii::app()->log->routes as $route) {
-            if ($route instanceof CWebLogRoute) {
-                $route->enabled = false; // disable any weblogroutes
-            }
-        }
-        //Yii::app()->end();
+        echo $result;
     }
 }
