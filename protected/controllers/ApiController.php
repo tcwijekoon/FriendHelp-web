@@ -73,6 +73,54 @@ class ApiController extends Controller
         }
     }
 
+    public function actionRequestHelp()
+    {
+        if (isset($_POST['RequestHelp']) && !empty($_POST['RequestHelp'])) {
+            $model = new RequestHelp();
+            $model->attributes = CJSON::decode($_POST['RequestHelp']);
+            try {
+                if ($model->save(false)) {
+                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'bbbbbbb')));
+                    echo $msg;
+                    die;
+                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'RequestHelp successful')));
+                    echo $msg;
+                } else {
+                    $msg = CJSON::encode(array(array('success' => "false", 'message' => 'RequestHelp failed')));
+                    echo $msg;
+                }
+            } catch (Exception $s) {
+                $msg = CJSON::encode(array(array('success' => "true", 'message' => $s->getMessage())));
+                echo $msg;
+                die;
+            }
+        }
+    }
+
+    public function actionUpdateMyLocation()
+    {
+        if (isset($_POST['UpdateMyLocation']) && !empty($_POST['UpdateMyLocation'])) {
+            $model = new UserLocation();
+            $model->attributes = CJSON::decode($_POST['UpdateMyLocation']);
+            try {
+                if ($model->save(false)) {
+                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'bbbbbbb')));
+                    echo $msg;
+                    die;
+                    $msg = CJSON::encode(array(array('success' => "true", 'message' => 'RequestHelp successful')));
+                    echo $msg;
+                } else {
+                    $msg = CJSON::encode(array(array('success' => "false", 'message' => 'RequestHelp failed')));
+                    echo $msg;
+                }
+            } catch (Exception $s) {
+                $msg = CJSON::encode(array(array('success' => "true", 'message' => $s->getMessage())));
+                echo $msg;
+                die;
+            }
+        }
+    }
+
 //    function loginUsingParams($username, $password)
 //    {
 //        $model = new LoginForm;
