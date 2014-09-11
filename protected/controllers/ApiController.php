@@ -188,53 +188,44 @@ class ApiController extends Controller
         //Yii::app()->end();
     }
 
-    public function actionGcm(){
+    public function actionGcm()
+    {
         $regId = 'APA91bHhKH6V7fpLqWeip85hxAw3k3ZWJAhCC3zZtRMtlIlEBaR0VkDTDi5dWbYKNQN6DTkEgVXCCjnBHBId4Cbx67hgMZLYgb0ugrRVXJqrUrQ2xR4dsLI_tehyk3OYLwjMlLdPgqgMfE92JmzfViaFjh0dS5n6TbYEQYPOZ8aRHZ1FpBybBZw';
         $message = 'test ddfsfsdfmsg';
-
         $registatoin_ids = array($regId);
         $message = array("price" => $message);
-
         $result = $this->send_notification($registatoin_ids, $message);
-
         echo $result;
     }
 
-    public function send_notification($registatoin_ids, $message) {
-        // Set POST variables
+    public function send_notification($registatoin_ids, $message)
+    {
+// Set POST variables
         $url = 'https://android.googleapis.com/gcm/send';
-
         $fields = array(
             'registration_ids' => $registatoin_ids,
             'data' => $message,
         );
-
         $headers = array(
             'Authorization: key=AIzaSyBo4BPp5b4VcAjOhvBQP3_KtQV9FVnUDB0',
             'Content-Type: application/json'
         );
-        // Open connection
+// Open connection
         $ch = curl_init();
-
-        // Set the url, number of POST vars, POST data
+// Set the url, number of POST vars, POST data
         curl_setopt($ch, CURLOPT_URL, $url);
-
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // Disabling SSL Certificate support temporarly
+// Disabling SSL Certificate support temporarly
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-
-        // Execute post
+// Execute post
         $result = curl_exec($ch);
         if ($result === FALSE) {
             die('Curl failed: ' . curl_error($ch));
         }
-
-        // Close connection
+// Close connection
         curl_close($ch);
         echo $result;
     }
