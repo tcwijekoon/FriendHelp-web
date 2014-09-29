@@ -45,7 +45,7 @@ class RequestCancel extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'requestHelp' => array(self::BELONGS_TO, 'RequestHelp', 'request_help_id'),
+//			'requestHelp' => array(self::BELONGS_TO, 'RequestHelp', 'request_help_id'),
 		);
 	}
 

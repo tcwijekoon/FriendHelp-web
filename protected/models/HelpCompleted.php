@@ -45,7 +45,7 @@ class HelpCompleted extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'helpAccept' => array(self::BELONGS_TO, 'AcceptHelp', 'help_accept_id'),
+//			'helpAccept' => array(self::BELONGS_TO, 'AcceptHelp', 'help_accept_id'),
 		);
 	}
 

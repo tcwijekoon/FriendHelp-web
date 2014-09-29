@@ -81,7 +81,7 @@ class User extends FriendHelpActiveRecord
             'bldGrp' => array(self::BELONGS_TO, 'BloodGroup', 'bld_grp_id'),
 //            'userHelpAccepteds' => array(self::HAS_MANY, 'UserHelpAccepted', 'user_id'),
 //            'userHelpRequests' => array(self::HAS_MANY, 'UserHelpRequests', 'user_id'),
-            'userLocations' => array(self::HAS_MANY, 'UserLocation', 'user_id'),
+//            'userLocations' => array(self::HAS_MANY, 'UserLocation', 'user_id'),
         );
     }
 

@@ -50,10 +50,10 @@ class AcceptHelp extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'acceptCancels' => array(self::HAS_MANY, 'AcceptCancel', 'accept_help_id'),
-			'requestHelp' => array(self::BELONGS_TO, 'RequestHelp', 'request_help_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'helpCompleteds' => array(self::HAS_MANY, 'HelpCompleted', 'help_accept_id'),
+//			'acceptCancels' => array(self::HAS_MANY, 'AcceptCancel', 'accept_help_id'),
+//			'requestHelp' => array(self::BELONGS_TO, 'RequestHelp', 'request_help_id'),
+//			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+//			'helpCompleteds' => array(self::HAS_MANY, 'HelpCompleted', 'help_accept_id'),
 		);
 	}
 

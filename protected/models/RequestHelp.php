@@ -48,9 +48,9 @@ class RequestHelp extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'acceptHelps' => array(self::HAS_MANY, 'AcceptHelp', 'request_help_id'),
-			'requestCancels' => array(self::HAS_MANY, 'RequestCancel', 'request_help_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+//			'acceptHelps' => array(self::HAS_MANY, 'AcceptHelp', 'request_help_id'),
+//			'requestCancels' => array(self::HAS_ONE, 'RequestCancel', 'request_help_id'),
+//			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
