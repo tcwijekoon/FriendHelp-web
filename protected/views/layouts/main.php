@@ -32,7 +32,16 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+
+                array('label'=>'Users', 'url'=>array('/user/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Skills', 'url'=>array('/skills/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'User Locations', 'url'=>array('/userLocation/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Help requests', 'url'=>array('/requestHelp/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Help accepts', 'url'=>array('/acceptHelp/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Requests Cancellations', 'url'=>array('/requestCancel/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Accept Cancellations', 'url'=>array('/acceptCancel/index'), 'visible'=>!Yii::app()->user->isGuest),
+
+                array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>

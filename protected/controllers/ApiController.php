@@ -35,6 +35,10 @@ class ApiController extends Controller
         }
     }
 
+//    public function actionLogout(){
+//        Yii::app()->user->logout();
+//    }
+
     public function actionUpdateGcmId()
     {
         if (isset($_POST['GcmInfo']) && !empty($_POST['GcmInfo'])) {
@@ -106,13 +110,14 @@ class ApiController extends Controller
     {
         $user = User::model()->findByPk($userId);
         $user->status_id = $status;
-        if ($user->update()) {
-            $msg = CJSON::encode(array(array('success' => "true", 'message' => 'update success')));
-            echo $msg;
-        } else {
-            $msg = CJSON::encode(array(array('success' => "false", 'message' => 'update failed')));
-            echo $msg;
-        }
+        $user->update();
+//        if ($user->update()) {
+//            $msg = CJSON::encode(array(array('success' => "true", 'message' => 'update success')));
+//            echo $msg;
+//        } else {
+//            $msg = CJSON::encode(array(array('success' => "false", 'message' => 'update failed')));
+//            echo $msg;
+//        }
     }
 
     public function updateRequestHelpStatus($userId, $status)
@@ -144,6 +149,7 @@ class ApiController extends Controller
                 $record->status = 3;
                 $record->update();
 
+                $this->updateUsertableStatus($userId,1);
                 $model = new RequestCancel();
                 $model->request_help_id = $record->request_help_id;
 
@@ -274,7 +280,7 @@ class ApiController extends Controller
             $lon = $in[1];
 
 //        kilometers instead of miles, replace 3959 with 6371.
-            $query = Yii::app()->db->createCommand("SELECT user_id,location_address,( 6371 * acos( cos( radians($lat) ) * cos( radians( gps_lat ) ) * cos( radians( gps_lon ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( gps_lat ) ) ) ) AS distance FROM tbl_user_location  where user_id = " . $userId . " HAVING distance < 20 ORDER BY distance LIMIT 0 , 10 ");
+            $query = Yii::app()->db->createCommand("SELECT user_id,location_address,( 6371 * acos( cos( radians($lat) ) * cos( radians( gps_lat ) ) * cos( radians( gps_lon ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( gps_lat ) ) ) ) AS distance FROM tbl_user_location  where user_id != " . $userId . " HAVING distance < 20 ORDER BY distance LIMIT 0 , 10 ");
             $result = $query->query();
 
 //            to get one row

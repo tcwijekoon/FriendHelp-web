@@ -7,8 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Friend Help',
-	'defaultController'=>'user/', //which controller should run at the begining user defaultController
+	'name'=>'Friend Help',//which controller should run at the begining user defaultController
 	// preloading 'log' component
 	'preload'=>array('log'),
 

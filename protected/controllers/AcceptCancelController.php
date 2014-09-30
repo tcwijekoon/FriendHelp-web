@@ -1,6 +1,6 @@
 <?php
 
-class SkillsController extends Controller
+class AcceptCancelController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -37,7 +37,7 @@ class SkillsController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('@'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -62,16 +62,16 @@ class SkillsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Skills;
+		$model=new AcceptCancel;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Skills']))
+		if(isset($_POST['AcceptCancel']))
 		{
-			$model->attributes=$_POST['Skills'];
+			$model->attributes=$_POST['AcceptCancel'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->skill_id));
+				$this->redirect(array('view','id'=>$model->accept_cancel_id));
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class SkillsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Skills']))
+		if(isset($_POST['AcceptCancel']))
 		{
-			$model->attributes=$_POST['Skills'];
+			$model->attributes=$_POST['AcceptCancel'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->skill_id));
+				$this->redirect(array('view','id'=>$model->accept_cancel_id));
 		}
 
 		$this->render('update',array(
@@ -122,7 +122,7 @@ class SkillsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Skills');
+		$dataProvider=new CActiveDataProvider('AcceptCancel');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +133,10 @@ class SkillsController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Skills('search');
+		$model=new AcceptCancel('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Skills']))
-			$model->attributes=$_GET['Skills'];
+		if(isset($_GET['AcceptCancel']))
+			$model->attributes=$_GET['AcceptCancel'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,12 +147,12 @@ class SkillsController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Skills the loaded model
+	 * @return AcceptCancel the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Skills::model()->findByPk($id);
+		$model=AcceptCancel::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,11 +160,11 @@ class SkillsController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Skills $model the model to be validated
+	 * @param AcceptCancel $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='skills-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='accept-cancel-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
